@@ -5,7 +5,7 @@
   color: #484e54;
   border-radius: 0 4px 4px 0;
   :hover {
-    background-color: #fafafa;
+    // background-color: #fafafa;
     cursor: pointer;
   }
 }
@@ -37,7 +37,4 @@
 .dropdown-item {
   width: 100%;
   text-align: center;
-  :hover {
-    background-color: black;
-  }
 }
