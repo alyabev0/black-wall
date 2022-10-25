@@ -1,17 +1,13 @@
+@import "../../styles/utils";
+
 $border: 1px solid #e2e5eb;
 $border-radius: 0 4px 4px 0;
-@mixin user-select-none {
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
 
 .dropdown {
   position: relative;
   min-width: 50px;
-  color: #484e54;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
+  color: $input-text-color;
   border: $border;
   border-radius: $border-radius;
   :hover {
@@ -19,35 +15,42 @@ $border-radius: 0 4px 4px 0;
   }
 }
 
-.dropdown-title {
-  position: absolute;
+.dropdown-button {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #484e54;
-  // font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: $border-radius;
   @include user-select-none;
 }
 
-.dropdown-items {
+.dropdown-button-content {
+  display: flex;
+  padding: 0 10px;
+}
+
+.arrow-icon {
+  width: 7px;
+  margin-left: 5px;
+}
+
+.dropdown-list {
   position: absolute;
   top: 100%;
-  width: 100%;
-  border: $border;
+  left: -1px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  border: $border;
+  border-radius: 0 0 4px 4px;
+  overflow: auto;
 }
 
 .dropdown-item {
-  width: 100%;
-  padding: 10px 0 10px 0;
+  padding: 5px;
   text-align: center;
   word-break: break-all;
   @include user-select-none;
-  :hover {
-    background-color: #fafafa;
-  }
 }

@@ -103,6 +103,9 @@ section {
 body {
   line-height: 1;
 }
+body * {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 ol,
 ul {
   list-style: none;

@@ -20,7 +20,7 @@ export const ConvertInput = () => {
 
     return (
         <div className="convert-input">
-            <Input placeholder={'Text'} />
+            <Input placeholder={'Текст...'} />
             <Dropdown items={items} />
         </div>
     )
