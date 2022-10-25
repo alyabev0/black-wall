@@ -18,7 +18,8 @@ export const Dropdown = ({ items }) => {
             <div className="dropdown" >
                 <div className="dropdown-title"
                     onMouseEnter={mouseEnterHandler}
-                    onMouseLeave={mouseLeaveHandler}>
+                    onMouseLeave={mouseLeaveHandler}
+                >
                     BTC
                 </div>
 
@@ -26,7 +27,12 @@ export const Dropdown = ({ items }) => {
 
                 <ul className="dropdown-items">
                     {items.map((item) =>
-                        <li className="dropdown-item">{item.title}</li>
+                        <li className="dropdown-item"
+                            onMouseEnter={mouseEnterHandler}
+                            onMouseLeave={mouseLeaveHandler}
+                        >
+                            {item.title}
+                        </li>
                     )}
                 </ul>
             </div>
