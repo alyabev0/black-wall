@@ -4,6 +4,7 @@ import "./Dropdown.scss"
 
 export const Dropdown = ({ items }) => {
     const [isListVisible, setIsListVisible] = useState(false)
+    const [currentValue, setCurrentValue] = useState('Выбрать')
     const dropdownButton = useRef(null)
 
     const changeBackgroundColor = e => {
@@ -16,7 +17,12 @@ export const Dropdown = ({ items }) => {
         }
     }
 
-    const clickHandler = () => {
+    const buttonClickHandler = () => {
+        setIsListVisible(!isListVisible)
+    }
+
+    const itemClickHandler = (item) => {
+        setCurrentValue(item.title)
         setIsListVisible(!isListVisible)
     }
 
@@ -26,24 +32,27 @@ export const Dropdown = ({ items }) => {
                 <div className="dropdown-button"
                     onMouseEnter={changeBackgroundColor}
                     onMouseLeave={changeBackgroundColor}
-                    onClick={clickHandler}
+                    onClick={buttonClickHandler}
                     ref={dropdownButton}
                 >
                     <div className='dropdown-button-content'>
-                        <span>BTC</span>
+                        <span>{currentValue}</span>
                         <img src={arrowIcon} className="arrow-icon" width="7px" alt="arrowIcon"></img>
                     </div>
                 </div>
 
                 <ul className="dropdown-list" style={{ display: isListVisible ? 'flex' : 'none' }}>
-                    {items.map((item) =>
+                    {items.filter((item) => item.title !== currentValue).map(filteredItem => (
                         <li className="dropdown-item"
+                            id={filteredItem.id}
                             onMouseEnter={changeBackgroundColor}
                             onMouseLeave={changeBackgroundColor}
+                            onClick={() => itemClickHandler(filteredItem)}
                         >
-                            {item.title}
+                            {filteredItem.title}
                         </li>
-                    )}
+                    ))
+                    }
                 </ul>
             </div>
         </>

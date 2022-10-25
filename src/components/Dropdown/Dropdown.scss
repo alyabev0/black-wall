@@ -5,9 +5,9 @@ $border-radius: 0 4px 4px 0;
 
 .dropdown {
   position: relative;
-  min-width: 50px;
+  width: 102px;
   box-sizing: border-box;
-  color: $input-text-color;
+  color: $text-color;
   border: $border;
   border-radius: $border-radius;
   :hover {
@@ -51,6 +51,5 @@ $border-radius: 0 4px 4px 0;
 .dropdown-item {
   padding: 5px;
   text-align: center;
-  word-break: break-all;
   @include user-select-none;
 }

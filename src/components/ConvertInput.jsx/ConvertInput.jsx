@@ -6,15 +6,15 @@ import { Dropdown } from "../Dropdown/Dropdown.jsx"
 export const ConvertInput = () => {
     const item1 = {
         title: "BTC",
-        value: 228
+        id: 1
     }
     const item2 = {
         title: "ETH",
-        value: 1337
+        id: 2
     }
     const item3 = {
         title: "USDTTRC",
-        value: 1337
+        id: 3
     }
     const items = [item1, item2, item3]
 
