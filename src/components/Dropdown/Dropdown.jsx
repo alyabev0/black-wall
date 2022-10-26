@@ -25,34 +25,29 @@ export const Dropdown = ({ items, convertOption }) => {
     const currentValueFrom = useSelector(state => state.filter.filterFromValue)
 
     const [currentValue, setCurrentValue] = useState('Выбрать');
+    console.log(currentValue, convertOption.convertOption)
 
     const filterItem = (() => {
-        console.log(convertOption, currentValueFrom)
+        // console.log(convertOption, currentValueFrom)
         if (convertOption.convertOption === 'filterTo' && currentValueFrom !== null) {
-            console.log(1, allCurrencies, currentValueFrom)
+            // console.log(1, allCurrencies, currentValueFrom)
             const availableCurrencies = allCurrencies.find(currency => currency.from.code === currentValueFrom).to
             return availableCurrencies
         } else if (convertOption.convertOption === 'filterFrom') {
-            console.log(2)
+            // console.log(2)
             const func = items.filter((item) => item.title !== currentValue && categories[category].includes(item.code))
             return func
         } else {
-            console.log(3)
+            // console.log(3)
             const func = items.filter((item) => item.title !== currentValue)
             return func
         }
     })()
 
-    console.log(filterItem)
+    // console.log(filterItem)
 
 
     const [isListVisible, setIsListVisible] = useState(false)
-
-
-
-    if (!categories[category].includes(currentValue) && currentValue !== 'Выбрать') setCurrentValue('Выбрать')
-
-
 
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
@@ -69,7 +64,9 @@ export const Dropdown = ({ items, convertOption }) => {
     }
 
     const itemClickHandler = (item) => {
+        console.log('item', item.code)
         setCurrentValue(item.code)
+        console.log(currentValue)
         if (convertOption.convertOption !== 'filterTo') dispatch(changeFilterFromValue(item.code))
         setIsListVisible(!isListVisible)
     }
