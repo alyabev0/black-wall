@@ -17,10 +17,10 @@ export const Dropdown = ({ items, convertOption }) => {
     const dispatch = useDispatch()
     //удалить потом
     const state = useSelector(state => state)
-    console.log(state)
+    // console.log(state)
 
 
-    const allCurrenies = useSelector(state => state.data.filters)
+    const allCurrencies = useSelector(state => state.data.filters)
     const category = useSelector(state => state.filter[convertOption.convertOption])
     const currentValueFrom = useSelector(state => state.filter.filterFromValue)
 
@@ -29,13 +29,15 @@ export const Dropdown = ({ items, convertOption }) => {
     const filterItem = (() => {
         console.log(convertOption, currentValueFrom)
         if (convertOption.convertOption === 'filterTo' && currentValueFrom !== null) {
-            const validCurrencies = allCurrenies.find(currency => currency.from.code === currentValueFrom)
-            const availableCurrencies = validCurrencies.to
+            console.log(1, allCurrencies, currentValueFrom)
+            const availableCurrencies = allCurrencies.find(currency => currency.from.code === currentValueFrom).to
             return availableCurrencies
         } else if (convertOption.convertOption === 'filterFrom') {
+            console.log(2)
             const func = items.filter((item) => item.title !== currentValue && categories[category].includes(item.code))
             return func
         } else {
+            console.log(3)
             const func = items.filter((item) => item.title !== currentValue)
             return func
         }
@@ -68,13 +70,13 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const itemClickHandler = (item) => {
         setCurrentValue(item.code)
-        dispatch(changeFilterFromValue(item.code))
+        if (convertOption.convertOption !== 'filterTo') dispatch(changeFilterFromValue(item.code))
         setIsListVisible(!isListVisible)
     }
 
     useEffect(() => {
         // console.log('dropdown rendered', items, category)
-        console.log('dropdown rendered', convertOption.convertOption)
+        // console.log('dropdown rendered', convertOption.convertOption)
     }, [])
 
     return (
