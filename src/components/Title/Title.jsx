@@ -1,9 +1,10 @@
 import "./Title.scss"
 import { useReducer, useState } from "react"
-import { changeFilterFrom } from "../../store/filterSlice"
+import { changeFilterFrom, changeFilterTo } from "../../store/filterSlice"
 import { useDispatch, useSelector } from "react-redux";
 
 export const Title = ({ header, convertOption }) => {
+    console.log(convertOption)
     const dispatch = useDispatch()
 
     const changeFilterStyles = (prevState, action) => {
@@ -19,10 +20,11 @@ export const Title = ({ header, convertOption }) => {
     const [currentFilter, dispatchCurrentFilter] = useReducer(changeFilterStyles, null)
 
     const clickHandler = (e) => {
-        if (convertOption.convertOption === 'filterFrom') {
+        console.log(convertOption)
+        if (convertOption === 'filterFrom' || undefined) {
             dispatch(changeFilterFrom(e.target.id))
-        } else if (convertOption.convertOption === 'filterTo') {
-            // dispatch(changeFilterFrom(e.target.id))
+        } else if (convertOption === 'filterTo' || undefined) {
+            dispatch(changeFilterTo(e.target.id))
         }
 
         dispatchCurrentFilter({ type: 'changeFilter', payload: e.target })
