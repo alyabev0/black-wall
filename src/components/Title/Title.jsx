@@ -2,6 +2,7 @@ import "./Title.scss"
 import { useReducer, useState } from "react"
 import { changeFilterFrom, changeFilterTo } from "../../store/filterSlice"
 import { useDispatch, useSelector } from "react-redux";
+import { changeFilterFromValue } from "../../store/filterSlice";
 
 export const Title = ({ header, convertOption }) => {
     const dispatch = useDispatch()
@@ -21,6 +22,7 @@ export const Title = ({ header, convertOption }) => {
     const clickHandler = (e) => {
         if (convertOption === 'filterFrom' || undefined) {
             dispatch(changeFilterFrom(e.target.id))
+            dispatch(changeFilterFromValue(null))
         } else if (convertOption === 'filterTo' || undefined) {
             dispatch(changeFilterTo(e.target.id))
         }

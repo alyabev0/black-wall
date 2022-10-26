@@ -7,7 +7,6 @@ import { useState, useEffect } from "react"
 
 export const ConvertInput = (convertOption) => {
     let items = useSelector(state => state.data.directions)
-    // useSelector(state => console.log(state))
 
     useEffect(() => {
         console.log('convertinput rendered')

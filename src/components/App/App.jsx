@@ -4,7 +4,7 @@ import { getDirections, getFilters } from "../../api/api";
 import { MainForm } from "../MainForm/MainForm";
 import "./App.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { directionsReceived, filtersReceived } from "../../store/dataSlice";
+import { directionsReceived, filtersReceived, dataReceived } from "../../store/dataSlice";
 
 function App() {
   const dispatch = useDispatch()
@@ -12,10 +12,9 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       const directions = await getDirections();
-      dispatch(directionsReceived(directions))
-
       const filters = await getFilters()
-      dispatch(filtersReceived(filters))
+
+      dispatch(dataReceived([directions, filters]))
     }
     getData()
   }, [])

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeFilterFromValue } from "../../store/filterSlice";
 import arrowIcon from "../../assets/icons/arrow-down.svg"
 import "./Dropdown.scss"
 
@@ -11,24 +12,45 @@ const categories = {
 }
 
 export const Dropdown = ({ items, convertOption }) => {
+    const dropdownButton = useRef(null)
 
-    const currencies = useSelector(state => state.filters)
+    const dispatch = useDispatch()
+    //удалить потом
+    const state = useSelector(state => state)
+    console.log(state)
+
+
+    const allCurrenies = useSelector(state => state.data.filters)
     const category = useSelector(state => state.filter[convertOption.convertOption])
+    const currentValueFrom = useSelector(state => state.filter.filterFromValue)
 
-    const filterFunction = (items) => {
-        if (convertOption.convertOption === 'filterTo') {
-            // const currencyIndex = currencies.find(currency => currency.from.code === category)
+    const [currentValue, setCurrentValue] = useState('Выбрать');
+
+    const filterItem = (() => {
+        console.log(convertOption, currentValueFrom)
+        if (convertOption.convertOption === 'filterTo' && currentValueFrom !== null) {
+            const validCurrencies = allCurrenies.find(currency => currency.from.code === currentValueFrom)
+            const availableCurrencies = validCurrencies.to
+            return availableCurrencies
+        } else if (convertOption.convertOption === 'filterFrom') {
+            const func = items.filter((item) => item.title !== currentValue && categories[category].includes(item.code))
+            return func
+        } else {
+            const func = items.filter((item) => item.title !== currentValue)
+            return func
         }
-    }
+    })()
+
+    console.log(filterItem)
 
 
     const [isListVisible, setIsListVisible] = useState(false)
-    const [currentValue, setCurrentValue] = useState('Выбрать');
+
 
 
     if (!categories[category].includes(currentValue) && currentValue !== 'Выбрать') setCurrentValue('Выбрать')
 
-    const dropdownButton = useRef(null)
+
 
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
@@ -46,11 +68,13 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const itemClickHandler = (item) => {
         setCurrentValue(item.code)
+        dispatch(changeFilterFromValue(item.code))
         setIsListVisible(!isListVisible)
     }
 
     useEffect(() => {
-        console.log('dropdown rendered', items, category)
+        // console.log('dropdown rendered', items, category)
+        console.log('dropdown rendered', convertOption.convertOption)
     }, [])
 
     return (
@@ -69,7 +93,7 @@ export const Dropdown = ({ items, convertOption }) => {
                 </div>
 
                 <ul className="dropdown-list" style={{ display: isListVisible ? 'flex' : 'none' }}>
-                    {items.filter((item) => item.title !== currentValue && categories[category].includes(item.code)).map(filteredItem => (
+                    {filterItem.map(filteredItem => (
                         <li className="dropdown-item"
                             onMouseEnter={changeBackgroundColor}
                             onMouseLeave={changeBackgroundColor}
