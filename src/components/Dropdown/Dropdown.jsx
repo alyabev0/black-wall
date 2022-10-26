@@ -49,6 +49,12 @@ export const Dropdown = ({ items, convertOption }) => {
 
     if (!categories[category].includes(currentValue) &&
         currentValue !== 'Выбрать') setCurrentValue('Выбрать')
+    console.log(currentValueFrom)
+    // if (convertOption.convertOption === 'filterTo' && currentValueFrom === null) {
+    //     console.log('works')
+    //     setCurrentValue('Выбрать')
+    // }
+    console.log(currentValue)
 
     // console.log(currentValueFrom)
     // if (convertOption.convertOption === 'filterTo' && currentValueFrom === null && currentValue !== "Выбрать") setCurrentValue('Выбрать')
