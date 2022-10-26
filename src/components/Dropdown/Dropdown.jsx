@@ -10,10 +10,15 @@ const categories = {
     'cash': ['CASHUSD', 'CASHRUB']
 }
 
-export const Dropdown = ({ items }) => {
+export const Dropdown = ({ items, convertOption }) => {
     const [isListVisible, setIsListVisible] = useState(false)
-    const [currentValue, setCurrentValue] = useState('Выбрать')
-    const category = useSelector(state => state.filter.filterFrom)
+    const [currentValue, setCurrentValue] = useState('Выбрать');
+
+    const category = useSelector(state => state.filter[convertOption.convertOption])
+    console.log(category, convertOption.convertOption)
+    console.log(!categories[category].includes(currentValue), categories[category], currentValue)
+    if (!categories[category].includes(currentValue) && currentValue !== 'Выбрать') setCurrentValue('Выбрать')
+
     const dropdownButton = useRef(null)
 
     const changeBackgroundColor = e => {
@@ -61,7 +66,7 @@ export const Dropdown = ({ items }) => {
                             onMouseLeave={changeBackgroundColor}
                             onClick={() => itemClickHandler(filteredItem)}
                         >
-                            {filteredItem.code}
+                            {filteredItem.name}
                         </li>
                     ))
                     }

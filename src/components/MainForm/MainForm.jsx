@@ -5,8 +5,14 @@ import "./MainForm.scss"
 export const MainForm = () => {
     return (
         <div className="main-form">
-            <Title header={'Отдаёте'} />
-            <ConvertInput />
+            <div className="convert-from">
+                <Title header={'Отдаёте'} />
+                <ConvertInput convertOption={'filterFrom'} />
+            </div>
+            <div className="convert-to">
+                <Title header={'Получаете'} />
+                <ConvertInput convertOption={'filterTo'} />
+            </div>
         </div>
     )
 }

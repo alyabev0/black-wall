@@ -5,7 +5,7 @@ import { Dropdown } from "../Dropdown/Dropdown.jsx"
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 
-export const ConvertInput = () => {
+export const ConvertInput = (convertOption) => {
     let items = useSelector(state => state.data.directions)
     // useSelector(state => console.log(state))
 
@@ -16,7 +16,7 @@ export const ConvertInput = () => {
     return (
         <div className="convert-input">
             <Input placeholder={'Курс валют...'} />
-            <Dropdown items={items} />
+            <Dropdown items={items} convertOption={convertOption} />
         </div>
     )
 }

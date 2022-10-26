@@ -1,14 +1,33 @@
 import "./Title.scss"
-import { useState } from "react"
+import { useReducer, useState } from "react"
 import { changeFilterFrom } from "../../store/filterSlice"
 import { useDispatch, useSelector } from "react-redux";
 
-export const Title = ({ header }) => {
+export const Title = ({ header, convertOption }) => {
     const dispatch = useDispatch()
 
-    const clickHandler = (e) => {
-        dispatch(changeFilterFrom(e.target.id))
+    const changeFilterStyles = (prevState, action) => {
+        action.payload.style.backgroundColor = "#f0807f"
+        action.payload.style.color = "white"
+        if (prevState !== action.payload && prevState !== null) {
+            prevState.style.backgroundColor = ""
+            prevState.style.color = ""
+        }
+        return action.payload
     }
+
+    const [currentFilter, dispatchCurrentFilter] = useReducer(changeFilterStyles, null)
+
+    const clickHandler = (e) => {
+        if (convertOption.convertOption === 'filterFrom') {
+            dispatch(changeFilterFrom(e.target.id))
+        } else if (convertOption.convertOption === 'filterTo') {
+            // dispatch(changeFilterFrom(e.target.id))
+        }
+
+        dispatchCurrentFilter({ type: 'changeFilter', payload: e.target })
+    }
+
     return (
         <div className="title-container">
             <div className="title-header">{header}</div>
