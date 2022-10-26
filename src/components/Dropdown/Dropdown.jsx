@@ -49,6 +49,14 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const [isListVisible, setIsListVisible] = useState(false)
 
+
+    console.log(categories[category], category)
+    if (!categories[category].includes(currentValue) &&
+        currentValue !== 'Выбрать' &&
+        convertOption.convertOption == 'filterFrom') setCurrentValue('Выбрать')
+
+
+
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
 
