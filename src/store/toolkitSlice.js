@@ -11,11 +11,7 @@ const toolkitSlice = createSlice({
     increment(state) {
       state.count = state.count + 1;
     },
-    addDirections(state, action) {
-      state.directions.push(action.payload);
-    },
     directionsReceived(state, action) {
-      // state.directions.push(action.payload);
       state.directions = action.payload;
     },
   },

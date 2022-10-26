@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import arrowIcon from "../../assets/icons/arrow-down.svg"
 import "./Dropdown.scss"
 
-export const Dropdown = ({ items, count }) => {
+export const Dropdown = ({ items }) => {
     const [isListVisible, setIsListVisible] = useState(false)
     const [currentValue, setCurrentValue] = useState('Выбрать')
     const dropdownButton = useRef(null)
@@ -32,7 +32,6 @@ export const Dropdown = ({ items, count }) => {
 
     return (
         <>
-            {count}
             <div className="dropdown" style={{ borderRadius: isListVisible ? '0 4px 0 0' : '0 4px 4px 0' }}>
                 <div className="dropdown-button"
                     onMouseEnter={changeBackgroundColor}
