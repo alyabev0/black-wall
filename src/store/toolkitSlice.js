@@ -3,20 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const toolkitSlice = createSlice({
   name: "directions",
   initialState: {
-    count: 0,
     directions: [],
     filters: [],
   },
   reducers: {
-    increment(state) {
-      state.count = state.count + 1;
-    },
     directionsReceived(state, action) {
       state.directions = action.payload;
+    },
+    filtersReceived(state, action) {
+      state.filters = action.payload;
     },
   },
 });
 
 export default toolkitSlice.reducer;
-export const { increment, addDirections, directionsReceived } =
-  toolkitSlice.actions;
+export const { directionsReceived, filtersReceived } = toolkitSlice.actions;

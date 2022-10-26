@@ -22,12 +22,12 @@ export const Dropdown = ({ items }) => {
     }
 
     const itemClickHandler = (item) => {
-        setCurrentValue(item.title)
+        setCurrentValue(item.code)
         setIsListVisible(!isListVisible)
     }
 
     useEffect(() => {
-        console.log('dropdown rendered')
+        console.log('dropdown rendered', items)
     }, [])
 
     return (
