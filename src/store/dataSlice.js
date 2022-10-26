@@ -7,11 +7,19 @@ const dataSlice = createSlice({
     filters: [],
   },
   reducers: {
+    directionsReceived(state, action) {
+      state.directions = action.payload;
+    },
+    filtersReceived(state, action) {
+      state.filters = action.payload;
+    },
     dataReceived(state, action) {
       [state.directions, state.filters] = [action.payload];
+      console.log(state.data);
     },
   },
 });
 
 export default dataSlice.reducer;
-export const { dataReceived } = dataSlice.actions;
+export const { directionsReceived, filtersReceived, dataReceived } =
+  dataSlice.actions;
