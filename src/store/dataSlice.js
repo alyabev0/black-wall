@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toolkitSlice = createSlice({
+const dataSlice = createSlice({
   name: "directions",
   initialState: {
     directions: [],
@@ -16,5 +16,5 @@ const toolkitSlice = createSlice({
   },
 });
 
-export default toolkitSlice.reducer;
-export const { directionsReceived, filtersReceived } = toolkitSlice.actions;
+export default dataSlice.reducer;
+export const { directionsReceived, filtersReceived } = dataSlice.actions;

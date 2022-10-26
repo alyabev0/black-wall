@@ -1,10 +1,19 @@
 import { useState, useRef, useEffect } from "react"
+import { useSelector } from "react-redux";
 import arrowIcon from "../../assets/icons/arrow-down.svg"
 import "./Dropdown.scss"
+
+const categories = {
+    'all': ['BTC', 'ETH', 'USDTTRC', 'ACRUB', 'SBERRUB', 'TCSBRUB', 'CASHUSD', 'CASHRUB'],
+    'cryptocurrency': ['BTC', 'ETH', 'USDTTRC'],
+    'banks': ['ACRUB', 'SBERRUB', 'TCSBRUB'],
+    'cash': ['CASHUSD', 'CASHRUB']
+}
 
 export const Dropdown = ({ items }) => {
     const [isListVisible, setIsListVisible] = useState(false)
     const [currentValue, setCurrentValue] = useState('Выбрать')
+    const category = useSelector(state => state.filter.filterFrom)
     const dropdownButton = useRef(null)
 
     const changeBackgroundColor = e => {
@@ -27,7 +36,7 @@ export const Dropdown = ({ items }) => {
     }
 
     useEffect(() => {
-        console.log('dropdown rendered', items)
+        console.log('dropdown rendered', items, category)
     }, [])
 
     return (
@@ -46,7 +55,7 @@ export const Dropdown = ({ items }) => {
                 </div>
 
                 <ul className="dropdown-list" style={{ display: isListVisible ? 'flex' : 'none' }}>
-                    {items.filter((item) => item.title !== currentValue).map(filteredItem => (
+                    {items.filter((item) => item.title !== currentValue && categories[category].includes(item.code)).map(filteredItem => (
                         <li className="dropdown-item"
                             onMouseEnter={changeBackgroundColor}
                             onMouseLeave={changeBackgroundColor}

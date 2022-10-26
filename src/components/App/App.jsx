@@ -4,7 +4,7 @@ import { getDirections, getFilters } from "../../api/api";
 import { MainForm } from "../MainForm/MainForm";
 import "./App.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { directionsReceived, filtersReceived } from "../../store/toolkitSlice";
+import { directionsReceived, filtersReceived } from "../../store/dataSlice";
 
 function App() {
   const dispatch = useDispatch()

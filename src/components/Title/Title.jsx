@@ -1,10 +1,13 @@
 import "./Title.scss"
 import { useState } from "react"
+import { changeFilterFrom } from "../../store/filterSlice"
+import { useDispatch, useSelector } from "react-redux";
 
 export const Title = ({ header }) => {
-    const [currentCategory, setCurrentCategory] = useState('all')
+    const dispatch = useDispatch()
+
     const clickHandler = (e) => {
-        setCurrentCategory(e.target.id)
+        dispatch(changeFilterFrom(e.target.id))
     }
     return (
         <div className="title-container">
