@@ -1,4 +1,4 @@
-export function mockGetDirections() {
+export function getDirections() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -39,7 +39,7 @@ export function mockGetDirections() {
   });
 }
 
-export function mockGetFilters() {
+export function getFilters() {
   return new Promise((resolve) => {
     resolve([
       {

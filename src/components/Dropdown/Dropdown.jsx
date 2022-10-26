@@ -1,8 +1,8 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import arrowIcon from "../../assets/icons/arrow-down.svg"
 import "./Dropdown.scss"
 
-export const Dropdown = ({ items }) => {
+export const Dropdown = ({ items, count }) => {
     const [isListVisible, setIsListVisible] = useState(false)
     const [currentValue, setCurrentValue] = useState('Выбрать')
     const dropdownButton = useRef(null)
@@ -26,8 +26,13 @@ export const Dropdown = ({ items }) => {
         setIsListVisible(!isListVisible)
     }
 
+    useEffect(() => {
+        console.log('dropdown rendered')
+    }, [])
+
     return (
         <>
+            {count}
             <div className="dropdown" style={{ borderRadius: isListVisible ? '0 4px 0 0' : '0 4px 4px 0' }}>
                 <div className="dropdown-button"
                     onMouseEnter={changeBackgroundColor}
@@ -44,12 +49,11 @@ export const Dropdown = ({ items }) => {
                 <ul className="dropdown-list" style={{ display: isListVisible ? 'flex' : 'none' }}>
                     {items.filter((item) => item.title !== currentValue).map(filteredItem => (
                         <li className="dropdown-item"
-                            id={filteredItem.id}
                             onMouseEnter={changeBackgroundColor}
                             onMouseLeave={changeBackgroundColor}
                             onClick={() => itemClickHandler(filteredItem)}
                         >
-                            {filteredItem.title}
+                            {filteredItem.code}
                         </li>
                     ))
                     }

@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 
-import { mockGetDirections, mockGetFilters } from "../../api/api";
+import { getDirections, getFilters } from "../../api/api";
 import { MainForm } from "../MainForm/MainForm";
 import "./App.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { increment } from "../../store/toolkitSlice";
+import { directionsReceived, increment } from "../../store/toolkitSlice";
 
 function App() {
-  const [convertData, setConvertData] = useState({})
-  const state = useSelector(state => state)
+  const directionsState = useSelector(state => state.toolkit.directions)
   const dispatch = useDispatch()
 
 
   const clickHandler = () => {
-    console.log(state)
     dispatch(increment())
-    console.log(state)
   }
 
   useEffect(() => {
     const getData = async () => {
-      const directions = await mockGetDirections();
-      const filters = await mockGetFilters()
-      setConvertData({
-        directions,
-        filters
-      })
+      const directions = await getDirections();
+      const filters = await getFilters()
+      // setConvertData({
+      //   directions,
+      //   filters
+      // })
+      dispatch(directionsReceived(directions))
+      // dispatch(increment())
     }
     getData()
   }, [])
