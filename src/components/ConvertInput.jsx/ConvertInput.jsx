@@ -3,7 +3,7 @@ import "./ConvertInput.scss"
 import { Input } from "../Input/Input.jsx"
 import { Dropdown } from "../Dropdown/Dropdown.jsx"
 import { useSelector } from "react-redux"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 
 export const ConvertInput = (convertOption) => {
     let items = useSelector(state => state.data.directions)

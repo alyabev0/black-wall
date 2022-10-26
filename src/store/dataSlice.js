@@ -13,10 +13,6 @@ const dataSlice = createSlice({
     filtersReceived(state, action) {
       state.filters = action.payload;
     },
-    dataReceived(state, action) {
-      [state.directions, state.filters] = [action.payload];
-      console.log(state.data);
-    },
   },
 });
 

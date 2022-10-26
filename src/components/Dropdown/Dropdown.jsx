@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { changeFilterFromValue } from "../../store/filterSlice";
 import arrowIcon from "../../assets/icons/arrow-down.svg"
@@ -23,7 +23,7 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const allCurrencies = useSelector(state => state.data.filters)
     const category = useSelector(state => state.filter[convertOption.convertOption])
-    const currentValueFrom = useSelector(state => state.filter.filterFromValue)
+    const filterFromValue = useSelector(state => state.filter.filterFromValue)
     const filterFrom = useSelector(state => state.filter.filterFrom)
     const filterTo = useSelector(state => state.filter.filterTo)
 
@@ -31,8 +31,8 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const filteredItems = (() => {
         console.log(filterFrom, filterTo)
-        if (convertOption.convertOption === 'filterTo' && currentValueFrom !== null) {
-            const availableCurrencies = allCurrencies.find(currency => currency.from.code === currentValueFrom).to
+        if (convertOption.convertOption === 'filterTo' && filterFromValue !== null) {
+            const availableCurrencies = allCurrencies.find(currency => currency.from.code === filterFromValue).to
             const validCurrencies = availableCurrencies.filter(currency => categories[filterTo].includes(currency.code))
             return validCurrencies
         } else if (convertOption.convertOption === 'filterFrom') {
@@ -45,17 +45,9 @@ export const Dropdown = ({ items, convertOption }) => {
     })()
     const filteredItemsCodes = filteredItems.map(filteredItem => filteredItem.code)
     if (currentValue !== "Выбрать" && !filteredItemsCodes.includes(currentValue)) setCurrentValue("Выбрать")
-    // if (!filteredItemsCodes.includes(currentValue) && currentValue !== "Выбрать" && )
-    // console.log(filteredItems, filterTo, filteredItemsCodes)
 
     if (!categories[category].includes(currentValue) &&
         currentValue !== 'Выбрать') setCurrentValue('Выбрать')
-    console.log(currentValueFrom)
-    // if (convertOption.convertOption === 'filterTo' && currentValueFrom === null) {
-    //     console.log('works')
-    //     setCurrentValue('Выбрать')
-    // }
-    console.log(currentValue)
 
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
@@ -68,7 +60,7 @@ export const Dropdown = ({ items, convertOption }) => {
     }
 
     const buttonClickHandler = () => {
-        if ((currentValueFrom === "Выбрать" || currentValueFrom === null) && convertOption.convertOption === 'filterTo') return
+        if ((filterFromValue === "Выбрать" || filterFromValue === null) && convertOption.convertOption === 'filterTo') return
         setIsListVisible(!isListVisible)
     }
 
@@ -77,11 +69,6 @@ export const Dropdown = ({ items, convertOption }) => {
         if (convertOption.convertOption !== 'filterTo') dispatch(changeFilterFromValue(item.code))
         setIsListVisible(!isListVisible)
     }
-
-    useEffect(() => {
-        // console.log('dropdown rendered', items, category)
-        // console.log('dropdown rendered', convertOption.convertOption)
-    }, [])
 
     return (
         <>

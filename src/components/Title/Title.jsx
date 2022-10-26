@@ -1,7 +1,7 @@
 import "./Title.scss"
-import { useReducer, useState } from "react"
+import { useReducer } from "react"
 import { changeFilterFrom, changeFilterTo } from "../../store/filterSlice"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeFilterFromValue } from "../../store/filterSlice";
 
 export const Title = ({ header, convertOption }) => {

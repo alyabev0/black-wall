@@ -1,4 +1,3 @@
-import { combineReducers } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 import dataSlice from "./dataSlice";
 import filterSlice from "./filterSlice";
