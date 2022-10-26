@@ -44,6 +44,7 @@ export const Dropdown = ({ items, convertOption }) => {
         }
     })()
     const filteredItemsCodes = filteredItems.map(filteredItem => filteredItem.code)
+    if (currentValue !== "Выбрать" && !filteredItemsCodes.includes(currentValue)) setCurrentValue("Выбрать")
     // if (!filteredItemsCodes.includes(currentValue) && currentValue !== "Выбрать" && )
     // console.log(filteredItems, filterTo, filteredItemsCodes)
 
@@ -56,9 +57,6 @@ export const Dropdown = ({ items, convertOption }) => {
     // }
     console.log(currentValue)
 
-    // console.log(currentValueFrom)
-    // if (convertOption.convertOption === 'filterTo' && currentValueFrom === null && currentValue !== "Выбрать") setCurrentValue('Выбрать')
-
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
 
@@ -70,7 +68,6 @@ export const Dropdown = ({ items, convertOption }) => {
     }
 
     const buttonClickHandler = () => {
-        console.log(currentValueFrom, convertOption.convertOption)
         if ((currentValueFrom === "Выбрать" || currentValueFrom === null) && convertOption.convertOption === 'filterTo') return
         setIsListVisible(!isListVisible)
     }
