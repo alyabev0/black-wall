@@ -10,7 +10,7 @@ $border-radius: 0 4px 4px 0;
   color: $text-color;
   border: $border;
   border-radius: $border-radius;
-  :hover {
+  &:hover {
     cursor: pointer;
   }
 }

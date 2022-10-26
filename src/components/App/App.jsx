@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { mockGetDirections, mockGetFilters } from "../../api/api";
 import { ConvertInput } from "../ConvertInput.jsx/ConvertInput";
+import { MainForm } from "../MainForm/MainForm";
+import { Title } from "../Title/Title";
 import "./App.scss";
 
 function App() {
@@ -21,7 +23,9 @@ function App() {
 
   return (
     <div className="container">
-      <ConvertInput />
+      {/* <Title />
+      <ConvertInput /> */}
+      <MainForm />
     </div>
   )
 }
