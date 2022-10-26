@@ -11,12 +11,21 @@ const categories = {
 }
 
 export const Dropdown = ({ items, convertOption }) => {
+
+    const currencies = useSelector(state => state.filters)
+    const category = useSelector(state => state.filter[convertOption.convertOption])
+
+    const filterFunction = (items) => {
+        if (convertOption.convertOption === 'filterTo') {
+            // const currencyIndex = currencies.find(currency => currency.from.code === category)
+        }
+    }
+
+
     const [isListVisible, setIsListVisible] = useState(false)
     const [currentValue, setCurrentValue] = useState('Выбрать');
 
-    const category = useSelector(state => state.filter[convertOption.convertOption])
-    console.log(category, convertOption.convertOption)
-    console.log(!categories[category].includes(currentValue), categories[category], currentValue)
+
     if (!categories[category].includes(currentValue) && currentValue !== 'Выбрать') setCurrentValue('Выбрать')
 
     const dropdownButton = useRef(null)

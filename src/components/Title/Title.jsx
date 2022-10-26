@@ -4,7 +4,6 @@ import { changeFilterFrom, changeFilterTo } from "../../store/filterSlice"
 import { useDispatch, useSelector } from "react-redux";
 
 export const Title = ({ header, convertOption }) => {
-    console.log(convertOption)
     const dispatch = useDispatch()
 
     const changeFilterStyles = (prevState, action) => {
@@ -20,7 +19,6 @@ export const Title = ({ header, convertOption }) => {
     const [currentFilter, dispatchCurrentFilter] = useReducer(changeFilterStyles, null)
 
     const clickHandler = (e) => {
-        console.log(convertOption)
         if (convertOption === 'filterFrom' || undefined) {
             dispatch(changeFilterFrom(e.target.id))
         } else if (convertOption === 'filterTo' || undefined) {
