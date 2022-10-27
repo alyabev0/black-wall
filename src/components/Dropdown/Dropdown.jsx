@@ -20,7 +20,6 @@ export const Dropdown = ({ items, convertOption }) => {
 
     const dispatch = useDispatch()
 
-
     const allCurrencies = useSelector(state => state.data.filters)
     const category = useSelector(state => state.filter[convertOption.convertOption])
     const filterFromValue = useSelector(state => state.filter.filterFromValue)
@@ -30,7 +29,6 @@ export const Dropdown = ({ items, convertOption }) => {
     const [currentValue, setCurrentValue] = useState('Выбрать');
 
     const filteredItems = (() => {
-        console.log(filterFrom, filterTo)
         if (convertOption.convertOption === 'filterTo' && filterFromValue !== null) {
             const availableCurrencies = allCurrencies.find(currency => currency.from.code === filterFromValue).to
             const validCurrencies = availableCurrencies.filter(currency => categories[filterTo].includes(currency.code))
@@ -44,10 +42,13 @@ export const Dropdown = ({ items, convertOption }) => {
         }
     })()
     const filteredItemsCodes = filteredItems.map(filteredItem => filteredItem.code)
+    // при данных условиях выбранная валюта в дропдауне сбрасывается
     if (currentValue !== "Выбрать" && !filteredItemsCodes.includes(currentValue)) setCurrentValue("Выбрать")
-
     if (!categories[category].includes(currentValue) &&
         currentValue !== 'Выбрать') setCurrentValue('Выбрать')
+    if (filterFromValue === null && currentValue !== "Выбрать" && convertOption.convertOption === 'filterTo') setCurrentValue("Выбрать")
+    if (filterFromValue !== currentValue && currentValue !== "Выбрать" && convertOption.convertOption === 'filterFrom') setCurrentValue("Выбрать")
+
 
     const changeBackgroundColor = e => {
         const color = e.type === 'mouseenter' ? '#fafafa' : 'white'
