@@ -13,12 +13,20 @@ $pink: #f0807f;
   color: $pink;
   font-weight: bold;
   @include user-select-none;
+  @media (max-width: 520px) {
+    width: 100px;
+    font-size: 14px;
+  }
 }
 
 .title-content {
   display: flex;
   font-size: 15px;
   @include user-select-none;
+  @media (max-width: 520px) {
+    width: 240px;
+    font-size: 12px;
+  }
 }
 
 .direction {
@@ -28,5 +36,8 @@ $pink: #f0807f;
     color: white;
     background-color: $pink;
     cursor: pointer;
+  }
+  @media (max-width: 520px) {
+    padding: 3px;
   }
 }
